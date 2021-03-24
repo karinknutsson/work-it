@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500;600;700&display=swap');
+
+html, body, div {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: white;
+  color: white;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 700;
+  font-size: 10vw;
+}
+
+.main-container {
+  width: 100%;
+  height: 100%;
+}
+
+.digit-container {
+  padding-top: 1.6vw;
+  width: 6.3vw;
+}
+
+.colon-container {
+  width: 2.6vw;
+}
+
+.main-container, .digit-container, .colon-container, #timer-ball {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#min-digits, #sec-digits {
+  display: flex;
+}
+
+#timer-ball {
+  width: 50vw;
+  height: 50vw;
+  border-radius: 25vw;
+  background: #4A3DF9;
+}
