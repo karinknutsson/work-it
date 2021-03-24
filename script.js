@@ -1,10 +1,12 @@
 // set variables for digit containers
+const hourDigits = document.getElementById('hour-digits');
 const minDigits = document.getElementById('min-digits');
 const secDigits = document.getElementById('sec-digits');
 
-// set counter variables for minutes and seconds
+// set counter variables for hours, minutes and seconds
+let hourCount = 0;
 let minCount = 0;
-let secCount = 1;
+let secCount = 0;
 
 // set timer array to store setTimeout values
 let timeouts = [];
@@ -35,18 +37,27 @@ function countSeconds() {
   // start setTimeout and store values in timeouts array
   timeouts.push(setTimeout(function() {
 
-      // call function to update values in interface
-      incrementTimer(secCount, secDigits);
+      // if second counter is less than 60, increment seconds
+      if (secCount < 59) {
+        secCount++;
+      } else {
 
-      // increment seconds
-      secCount++;
+        // when second counter reaches 60, increment minutes and reset second counter
+        if (minCount < 59) {
+          minCount++;
+          incrementTimer(minCount, minDigits);
+        } else {
 
-      // when second counter reaches 60, increment minutes and reset second counter
-      if (secCount >= 60) {
-        incrementTimer(minCount, minDigits);
-        minCount++;
+          // when minute counter reaches 60, increment hours and reset minute counter
+          hourCount++;
+          incrementTimer(hourCount, hourDigits);
+        }
         secCount = 0;
       }
+
+      // call incrementTimer function to update values in interface
+      incrementTimer(secCount, secDigits);
+
       countSeconds();
     }, 1000)
   );
@@ -63,6 +74,7 @@ function pauseTimer(e) {
     })
     timeouts = [];
   }
+  console.log('timer pauses');
 
   // remove event listener for pause and add event listener to start timer again
   document.removeEventListener('keyup', pauseTimer);
@@ -76,15 +88,12 @@ function startTimer(e) {
   // start timer if spacebar is pressed
   if (e.keyCode == 32) {
     countSeconds();
+    console.log('timer starts');
     document.removeEventListener('keyup', startTimer);
     document.addEventListener('keyup', pauseTimer);
   }
 
 }
-
-
-// add event listener to start timer
-document.addEventListener('keyup', startTimer);
 
 
 function leaveFullscreen(e) {
@@ -105,8 +114,8 @@ function goFullscreen(e) {
 }
 
 
-// add event listener for fullscreen mode
-document.addEventListener('keyup', goFullscreen);
-
-
+window.addEventListener('load', (event) => {
+  document.addEventListener('keyup', startTimer);
+  document.addEventListener('keyup', goFullscreen);
+});
 
