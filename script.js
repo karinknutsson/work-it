@@ -74,7 +74,6 @@ function pauseTimer(e) {
     })
     timeouts = [];
   }
-  console.log('timer pauses');
 
   // remove event listener for pause and add event listener to start timer again
   document.removeEventListener('keyup', pauseTimer);
@@ -88,7 +87,6 @@ function startTimer(e) {
   // start timer if spacebar is pressed
   if (e.keyCode == 32) {
     countSeconds();
-    console.log('timer starts');
     document.removeEventListener('keyup', startTimer);
     document.addEventListener('keyup', pauseTimer);
   }
