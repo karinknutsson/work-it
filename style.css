@@ -6,11 +6,14 @@ html, body, div {
 }
 
 body {
-  background: white;
-  color: white;
+  background: #4A3DF9;
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 700;
-  font-size: 9.6vw;
+  transition: background 2s;
+}
+
+h3 {
+  font-size: 1.8vw;
 }
 
 ul {
@@ -19,12 +22,43 @@ ul {
 
 li {
   display: table-cell;
-  padding-right: 4vw;
+  padding-right: 5vw;
 }
 
-.main-container {
+input[type=number] {
+  width: 10vw;
+  margin: 1vw;
+  padding: 2vw;
+  background: #F0F0F0;
+  color: black;
+  font-family: inherit;
+  font-size: 1.8vw;
+  font-weight: 700;
+  border: 0;
+  border-radius: 1vw;
+}
+
+input[type=submit] {
+  width: 16vw;
+  margin: 2vw 1vw 2vw 0;
+  padding: 1.6vw 0 1.4vw 0;
+  background: #FB2843;
+  color: #FEFEFE;
+  font-family: inherit;
+  font-size: 2vw;
+  font-weight: 700;
+  border: 0;
+  border-radius: 1vw;
+  float: right;
+}
+
+input:focus {
+  outline: none;
+}
+
+.main-container, .form-container {
   width: 100%;
-  height: 90%;
+  height: 86%;
 }
 
 .digit-container {
@@ -36,24 +70,64 @@ li {
   width: 2.6vw;
 }
 
-.main-container, .digit-container, .colon-container, #timer-ball {
+.main-container, .digit-container, .colon-container, .form-container,
+#stopwatch-container, #instructions {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.modal-content {
+  background-color: white;
+  margin: 5vw auto;
+  width: 50%;
+  height: 70%;
+}
+
+.close {
+  margin-right: 1.6vw;
+  color: #C5C5C5;
+  font-size: 4vw;
+  font-weight: 400;
+  float: right;
+}
+
+.form-input {
+  margin-bottom: 1vw;
+  width: 35vw;
+  height: 5vw;
+  display: flex;
+  justify-content: space-between;
 }
 
 #hour-digits, #min-digits, #sec-digits {
   display: flex;
 }
 
-#timer-ball {
+#stopwatch-container {
   width: 46vw;
-  height: 46vw;
-  border-radius: 23vw;
-  background: #4A3DF9;
+  height: 40vw;
+  color: #FEFEFE;
+  font-size: 9.6vw;
 }
 
 #instructions {
-  color: #c5c5c5;
+  width: 100%;
+  color: #FEFEFE;
   font-size: 2vw;
+  letter-spacing: 0.1vw;
 }
+
+
