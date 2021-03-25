@@ -15,23 +15,43 @@ ul {
   list-style-type: none;
 }
 
-li {
+.li-instruct {
   display: table-cell;
   padding-right: 5vw;
 }
 
-input[type=text] {
-  padding: 20px 40px;
-  width: 400px;
-  background: #F6F6F6;
+input[type=number] {
+  width: 8vw;
+  margin: 1vw;
+  padding: 1.4vw;
+  background: #F0F0F0;
   color: black;
-  font-family: 'Josefin Sans', sans-serif;
-  font-weight: 400;
+  font-family: inherit;
+  font-size: 1.4vw;
+  font-weight: 700;
   border: 0;
-  border-radius: 20px;
+  border-radius: 1vw;
 }
 
-.main-container {
+input[type=submit] {
+  width: 34vw;
+  margin: 2vw 1vw 2vw 0;
+  padding-top: 2.2vw;
+  padding-bottom: 2vw;
+  background: #FB2843;
+  color: #FEFEFE;
+  font-family: inherit;
+  font-size: 2.8vw;
+  font-weight: 700;
+  border: 0;
+  border-radius: 1vw;
+}
+
+input:focus {
+  outline: none;
+}
+
+.main-container, .form-container {
   width: 100%;
   height: 90%;
 }
@@ -45,7 +65,8 @@ input[type=text] {
   width: 2.6vw;
 }
 
-.main-container, .digit-container, .colon-container, #stopwatch-container, #instructions {
+.main-container, .digit-container, .colon-container, .form-container,
+#stopwatch-container, #instructions {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,15 +87,23 @@ input[type=text] {
 .modal-content {
   background-color: white;
   margin: 5vw auto;
-  width: 80%;
-  height: 80%;
+  width: 50%;
+  height: 70%;
 }
 
 .close {
-  color: #C5C5C5;
-  float: right;
-  font-size: 4vw;
   margin-right: 1.6vw;
+  color: #C5C5C5;
+  font-size: 4vw;
+  font-weight: 400;
+  float: right;
+}
+
+.form-input {
+  width: 35vw;
+  height: 5vw;
+  display: flex;
+  justify-content: space-between;
 }
 
 #hour-digits, #min-digits, #sec-digits {
@@ -96,7 +125,5 @@ input[type=text] {
 }
 
 #interval-form {
-  padding: 20vw 10vw;
-  width: 80%;
   font-size: 1.4vw;
 }

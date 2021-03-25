@@ -26,20 +26,32 @@
 
     <div id="instructions">
       <ul>
-        <li>SPACEBAR - start/stop</li>
-        <li>F - toggle fullscreen</li>
-        <li>S - set sprint intervals</li>
+        <li class="li-instruct">SPACEBAR - start/stop</li>
+        <li class="li-instruct">F - toggle fullscreen</li>
+        <li class="li-instruct">S - set sprint intervals</li>
       </ul>
     </div>
 
     <div id="intervalModal" class="modal">
       <div class="modal-content">
         <span class="close">&times;</span>
-        <form id="interval-form">
-          <label for="sprint-input">Sprint length</label>
-          <input id="sprint-input" type="text" placeholder="type length (in seconds)">
-          <input type="submit" value="Start!">
-        </form>
+        <div class="form-container">
+          <form id="interval-form">
+            <div class="form-input">
+              <h3><label for="sprint-input">Sprint length (in seconds)</label></h3>
+              <input id="sprint-input" type="number" min="5" max="1800" >
+            </div>
+            <div class="form-input">
+              <h3><label for="pause-input">Pause length (in seconds)</label></h3>
+              <input id="pause-input" type="number" min="5" max="1800">
+            </div>
+            <div class="form-input">
+              <h3><label for="sprint-number">How many repetitions?</label></h3>
+              <input id="rep-input" type="number" min="1" max="10" step="1">
+            </div>
+            <input type="submit" value="GO">
+          </form>
+        </div>
       </div>
     </div>
 
