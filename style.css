@@ -6,7 +6,7 @@ html, body, div {
 }
 
 body {
-  background: white;
+  background: #4A3DF9;
   color: white;
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 700;
@@ -19,7 +19,7 @@ ul {
 
 li {
   display: table-cell;
-  padding-right: 4vw;
+  padding-right: 5vw;
 }
 
 .main-container {
@@ -36,7 +36,7 @@ li {
   width: 2.6vw;
 }
 
-.main-container, .digit-container, .colon-container, #timer-ball {
+.main-container, .digit-container, .colon-container, #timer-ball, #instructions {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -48,12 +48,12 @@ li {
 
 #timer-ball {
   width: 46vw;
-  height: 46vw;
-  border-radius: 23vw;
-  background: #4A3DF9;
+  height: 40vw;
 }
 
 #instructions {
-  color: #c5c5c5;
+  width: 100%;
+  color: #C5C5C5;
   font-size: 2vw;
+  letter-spacing: 0.1vw;
 }

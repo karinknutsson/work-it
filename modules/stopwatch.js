@@ -93,27 +93,8 @@ function startTimer(e) {
 
 }
 
-
-function leaveFullscreen(e) {
-  if (e.keyCode == 70) {
-    document.exitFullscreen();
-    document.removeEventListener('keyup', leaveFullscreen);
-    document.addEventListener('keyup', goFullscreen);
-  }
-}
-
-
-function goFullscreen(e) {
-  if (e.keyCode == 70) {
-    document.documentElement.requestFullscreen();
-    document.removeEventListener('keyup', goFullscreen);
-    document.addEventListener('keyup', leaveFullscreen);
-  }
-}
-
-
-window.addEventListener('load', (event) => {
-  document.addEventListener('keyup', startTimer);
-  document.addEventListener('keyup', goFullscreen);
-});
+export { incrementTimer };
+export { countSeconds };
+export { pauseTimer };
+export { startTimer };
 
