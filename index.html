@@ -6,7 +6,7 @@
   <body>
 
     <div class="main-container">
-      <div id="timer-ball">
+      <div id="stopwatch-container">
         <div id="hour-digits">
           <div class="digit-container">0</div>
           <div class="digit-container">0</div>
@@ -30,6 +30,17 @@
         <li>F - toggle fullscreen</li>
         <li>S - set sprint intervals</li>
       </ul>
+    </div>
+
+    <div id="intervalModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="interval-form">
+          <label for="sprint-input">Sprint length</label>
+          <input id="sprint-input" type="text" placeholder="type length (in seconds)">
+          <input type="submit" value="Start!">
+        </form>
+      </div>
     </div>
 
     <script type="module" src="index.js"></script>

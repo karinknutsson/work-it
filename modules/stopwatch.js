@@ -93,6 +93,20 @@ function startTimer(e) {
 
 }
 
+
+function initTimer(e) {
+
+  // initialize timer
+  if (e.keyCode == 32 && hourCount == 0 && minCount == 0 && secCount == 0) {
+    countSeconds();
+    document.removeEventListener('keyup', startTimer);
+    document.addEventListener('keyup', pauseTimer);
+  }
+
+}
+
+
+export { initTimer };
 export { incrementTimer };
 export { countSeconds };
 export { pauseTimer };
