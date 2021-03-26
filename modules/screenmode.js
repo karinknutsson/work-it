@@ -6,7 +6,6 @@ function leaveFullscreen(event) {
   }
 }
 
-
 function goFullscreen(event) {
   if (event.keyCode == 70) {
     document.documentElement.requestFullscreen();
@@ -14,7 +13,6 @@ function goFullscreen(event) {
     document.addEventListener('keyup', leaveFullscreen);
   }
 }
-
 
 export { leaveFullscreen };
 export { goFullscreen };

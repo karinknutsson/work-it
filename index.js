@@ -10,7 +10,6 @@ import {
   openIntervals
 } from './modules/intervals.js'
 
-
 window.addEventListener('load', (event) => {
   document.addEventListener('keyup', startTimer);
   document.addEventListener('keyup', goFullscreen);
