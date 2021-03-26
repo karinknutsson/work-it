@@ -3,11 +3,18 @@ const span = document.getElementsByClassName('close')[0];
 
 let initCount = 0;
 
+const shortBeep = new Audio('sounds/short_beep.mp3');
+const longBeep = new Audio('sounds/long_beep.mp3');
 
 function intervalRep(sprint, pause, rep) {
 
   console.log("interval starts:");
   document.body.style.background = '#FB2843';
+
+  setTimeout(function() {
+    longBeep.play();
+  }, 500);
+
 
   setTimeout(function() {
     document.body.style.background = '#CB4dFF';
@@ -30,6 +37,7 @@ function intervalRep(sprint, pause, rep) {
 function countDown() {
   document.body.style.background = '#FB2843';
   setTimeout(function() {
+    shortBeep.play();
     initCount++;
     console.log(initCount);
     document.body.style.background = '#4A3DF9';
@@ -37,9 +45,9 @@ function countDown() {
       console.log("black bg");
       setTimeout(function() {
         countDown();
-      }, 2000);
+      }, 500);
     }
-  }, 2000);
+  }, 500);
 }
 
 
@@ -70,7 +78,7 @@ function intervalsForm() {
     countDown();
     setTimeout(function() {
       intervalRep(sprintLength.value, pauseLength.value, repCount.value);
-    }, 12000);
+    }, 3000);
   });
 }
 
