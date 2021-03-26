@@ -1,7 +1,10 @@
 const modal = document.getElementById('intervalModal');
 const span = document.getElementsByClassName('close')[0];
 
-function intervalRep(sprintLength, pauseLength, repCount) {
+let initCount = 0;
+
+
+function intervalRep(sprint, pause, rep) {
 
   console.log("interval starts:");
   document.body.style.background = '#FB2843';
@@ -11,16 +14,49 @@ function intervalRep(sprintLength, pauseLength, repCount) {
 
     setTimeout(function() {
       document.body.style.background = '#FB2843';
-      repCount--;
-      if (repCount > 0) {
-        intervalRep(sprintLength, pauseLength, repCount);
+      rep--;
+      if (rep > 0) {
+        intervalRep(sprint, pause, rep);
       } else {
         document.body.style.background = '#4A3DF9';
+        initCount = 0;
       }
-    }, pauseLength * 1000);
+    }, pause * 1000);
 
-  }, sprintLength * 1000);
+  }, sprint * 1000);
 }
+
+
+function countDown() {
+  document.body.style.background = '#FB2843';
+  setTimeout(function() {
+    initCount++;
+    console.log(initCount);
+    document.body.style.background = '#4A3DF9';
+    if (initCount < 3) {
+      console.log("black bg");
+      setTimeout(function() {
+        countDown();
+      }, 2000);
+    }
+  }, 2000);
+}
+
+
+// function countDown(sprintLength, pauseLength, repCount) {
+//   document.body.style.background = 'white';
+//   setTimeout(function() {
+//     count++;
+//     console.log(count);
+//     if (count < 4) {
+//       console.log("why?");
+//       document.body.style.background = '#4A3DF9';
+//       countDown(sprintLength, pauseLength, repCount);
+//     } else {
+//       intervalRep(sprintLength, pauseLength, repCount);
+//     }
+//   }, 2000);
+// }
 
 function intervalsForm() {
   const form = document.getElementById('interval-form');
@@ -31,7 +67,10 @@ function intervalsForm() {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     modal.style.display = 'none';
-    intervalRep(sprintLength.value, pauseLength.value, repCount.value);
+    countDown();
+    setTimeout(function() {
+      intervalRep(sprintLength.value, pauseLength.value, repCount.value);
+    }, 12000);
   });
 }
 
