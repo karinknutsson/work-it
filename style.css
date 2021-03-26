@@ -13,7 +13,8 @@ body {
 }
 
 h3 {
-  font-size: 1.8vw;
+  font-size: 1.3rem;
+  font-weight: 700;
 }
 
 ul {
@@ -26,29 +27,31 @@ li {
 }
 
 input[type=number] {
-  width: 10vw;
-  margin: 1vw;
-  padding: 2vw;
+  width: 80px;
+  height: 50px;
+  margin: 6px 0 10px 24px;
   background: #F0F0F0;
   color: black;
   font-family: inherit;
-  font-size: 1.8vw;
+  font-size: 1.3rem;
   font-weight: 700;
+  text-align: center;
   border: 0;
-  border-radius: 1vw;
+  border-radius: 16px;
 }
 
 input[type=submit] {
-  width: 16vw;
-  margin: 2vw 1vw 2vw 0;
-  padding: 1.6vw 0 1.4vw 0;
+  width: 160px;
+  height: 54px;
+  margin-top: 8%;
+  padding-top: 6px;
   background: #FB2843;
   color: #FEFEFE;
   font-family: inherit;
-  font-size: 2vw;
+  font-size: 1.3rem;
   font-weight: 700;
   border: 0;
-  border-radius: 1vw;
+  border-radius: 18px;
   float: right;
 }
 
@@ -91,23 +94,26 @@ input:focus {
 
 .modal-content {
   background-color: white;
-  margin: 5vw auto;
+  margin: 6vw auto;
   width: 50%;
+  min-width: 500px;
+  max-width: 800px;
   height: 70%;
+  min-height: 400px;
+  max-height: 700px;
 }
 
 .close {
-  margin-right: 1.6vw;
+  margin-right: 1.8%;
   color: #C5C5C5;
-  font-size: 4vw;
+  font-size: 3rem;
   font-weight: 400;
   float: right;
 }
 
 .form-input {
-  margin-bottom: 1vw;
-  width: 35vw;
-  height: 5vw;
+  margin-bottom: 3%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }
@@ -126,8 +132,7 @@ input:focus {
 #instructions {
   width: 100%;
   color: #FEFEFE;
-  font-size: 2vw;
+  /* font-size: 2vw; */
+  font-size: 1.2rem;
   letter-spacing: 0.1vw;
 }
-
-
