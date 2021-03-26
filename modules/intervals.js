@@ -74,8 +74,8 @@ function intervalsForm() {
 }
 
 
-function openIntervals(e) {
-  if (e.keyCode == 83) {
+function openIntervals(event) {
+  if (event.keyCode == 83) {
     modal.style.display = 'block';
 
     intervalsForm();

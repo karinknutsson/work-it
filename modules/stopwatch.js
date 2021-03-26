@@ -12,7 +12,7 @@ let secCount = 0;
 let timeouts = [];
 
 // set variable to check if stopwatch is running
-let stopwatchOn = false;
+let stopwatch = false;
 
 
 function incrementTimer(count, div) {
@@ -37,7 +37,7 @@ function incrementTimer(count, div) {
 
 function countSeconds() {
 
-  stopwatchOn = true;
+  stopwatch = true;
 
   // start setTimeout and store values in timeouts array
   timeouts.push(setTimeout(function() {
@@ -70,11 +70,11 @@ function countSeconds() {
 }
 
 
-function pauseTimer(e) {
+function pauseTimer(event) {
 
   // stop timer if spacebar is pressed and clear timeouts array
-  if (e.keyCode == 32) {
-    stopwatchOn = false;
+  if (event.keyCode == 32) {
+    stopwatch = false;
     timeouts.forEach(function(t) {
       clearTimeout(t);
     })
@@ -88,10 +88,10 @@ function pauseTimer(e) {
 }
 
 
-function startTimer(e) {
+function startTimer(event) {
 
   // start timer if spacebar is pressed
-  if (e.keyCode == 32) {
+  if (event.keyCode == 32) {
     countSeconds();
     document.removeEventListener('keyup', startTimer);
     document.addEventListener('keyup', pauseTimer);
@@ -100,10 +100,10 @@ function startTimer(e) {
 }
 
 
-function initTimer(e) {
+function initTimer(event) {
 
   // initialize timer
-  if (e.keyCode == 32 && hourCount == 0 && minCount == 0 && secCount == 0) {
+  if (event.keyCode == 32 && hourCount == 0 && minCount == 0 && secCount == 0) {
     countSeconds();
     document.removeEventListener('keyup', initTimer);
     document.addEventListener('keyup', pauseTimer);
@@ -112,9 +112,37 @@ function initTimer(e) {
 }
 
 
+function resetTimer(e) {
+
+  if (e.keyCode == 82) {
+
+    hourCount = 0;
+    minCount = 0;
+    secCount = 0;
+
+    hourDigits.innerHTML = `
+      <div class="digit-container">0</div>
+      <div class="digit-container">0</div>
+    `;
+
+    minDigits.innerHTML = `
+      <div class="digit-container">0</div>
+      <div class="digit-container">0</div>
+    `;
+
+    secDigits.innerHTML = `
+      <div class="digit-container">0</div>
+      <div class="digit-container">0</div>
+    `;
+
+  }
+}
+
+
 export { initTimer };
 export { incrementTimer };
 export { countSeconds };
 export { pauseTimer };
 export { startTimer };
+export { resetTimer };
 
