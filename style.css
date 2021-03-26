@@ -66,11 +66,11 @@ input:focus {
 
 .digit-container {
   padding-top: 1.6vw;
-  width: 6vw;
+  width: 8vw;
 }
 
 .colon-container {
-  width: 2.6vw;
+  width: 4vw;
 }
 
 .main-container, .digit-container, .colon-container, .form-container,
@@ -123,10 +123,10 @@ input:focus {
 }
 
 #stopwatch-container {
-  width: 46vw;
+  margin-top: 3vw;
   height: 40vw;
   color: #FEFEFE;
-  font-size: 9.6vw;
+  font-size: 13vw;
 }
 
 #instructions {
