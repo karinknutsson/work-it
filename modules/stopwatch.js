@@ -12,7 +12,7 @@ let secCount = 0;
 let timeouts = [];
 
 // set variable to check if stopwatch is running
-let stopwatch = false;
+let timerRunning = false;
 
 
 function incrementTimer(count, div) {
@@ -36,8 +36,6 @@ function incrementTimer(count, div) {
 
 
 function countSeconds() {
-
-  stopwatch = true;
 
   // start setTimeout and store values in timeouts array
   timeouts.push(setTimeout(function() {
@@ -73,8 +71,8 @@ function countSeconds() {
 function pauseTimer(event) {
 
   // stop timer if spacebar is pressed and clear timeouts array
-  if (event.keyCode == 32) {
-    stopwatch = false;
+  if (event.keyCode == 32 && timerRunning == true) {
+    timerRunning = false;
     timeouts.forEach(function(t) {
       clearTimeout(t);
     })
@@ -91,21 +89,10 @@ function pauseTimer(event) {
 function startTimer(event) {
 
   // start timer if spacebar is pressed
-  if (event.keyCode == 32) {
+  if (event.keyCode == 32 && timerRunning == false) {
+    timerRunning = true;
     countSeconds();
     document.removeEventListener('keyup', startTimer);
-    document.addEventListener('keyup', pauseTimer);
-  }
-
-}
-
-
-function initTimer(event) {
-
-  // initialize timer
-  if (event.keyCode == 32 && hourCount == 0 && minCount == 0 && secCount == 0) {
-    countSeconds();
-    document.removeEventListener('keyup', initTimer);
     document.addEventListener('keyup', pauseTimer);
   }
 
@@ -115,6 +102,14 @@ function initTimer(event) {
 function resetTimer(e) {
 
   if (e.keyCode == 82) {
+
+    if (timerRunning == true) {
+      timerRunning = false;
+      timeouts.forEach(function(t) {
+        clearTimeout(t);
+      })
+      timeouts = [];
+    }
 
     hourCount = 0;
     minCount = 0;
@@ -138,8 +133,6 @@ function resetTimer(e) {
   }
 }
 
-
-export { initTimer };
 export { incrementTimer };
 export { countSeconds };
 export { pauseTimer };
