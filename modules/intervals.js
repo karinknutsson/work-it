@@ -3,6 +3,10 @@ const span = document.getElementsByClassName('close')[0];
 
 let initCount = 0;
 
+const shortBeep = new Audio('sounds/short_beep.mp3');
+const longBeep = new Audio('sounds/long_beep.mp3');
+const lowBeep = new Audio('sounds/low_beep.mp3');
+
 
 function intervalRep(sprint, pause, rep) {
 
@@ -10,7 +14,16 @@ function intervalRep(sprint, pause, rep) {
   document.body.style.background = '#FB2843';
 
   setTimeout(function() {
+    longBeep.play();
+  }, 500);
+
+  setTimeout(function() {
     document.body.style.background = '#CB4dFF';
+
+    setTimeout(function() {
+      lowBeep.play();
+    }, 500);
+
 
     setTimeout(function() {
       document.body.style.background = '#FB2843';
@@ -30,6 +43,7 @@ function intervalRep(sprint, pause, rep) {
 function countDown() {
   document.body.style.background = '#FB2843';
   setTimeout(function() {
+    shortBeep.play();
     initCount++;
     console.log(initCount);
     document.body.style.background = '#4A3DF9';
@@ -37,26 +51,11 @@ function countDown() {
       console.log("black bg");
       setTimeout(function() {
         countDown();
-      }, 2000);
+      }, 500);
     }
-  }, 2000);
+  }, 500);
 }
 
-
-// function countDown(sprintLength, pauseLength, repCount) {
-//   document.body.style.background = 'white';
-//   setTimeout(function() {
-//     count++;
-//     console.log(count);
-//     if (count < 4) {
-//       console.log("why?");
-//       document.body.style.background = '#4A3DF9';
-//       countDown(sprintLength, pauseLength, repCount);
-//     } else {
-//       intervalRep(sprintLength, pauseLength, repCount);
-//     }
-//   }, 2000);
-// }
 
 function intervalsForm() {
   const form = document.getElementById('interval-form');
@@ -70,7 +69,7 @@ function intervalsForm() {
     countDown();
     setTimeout(function() {
       intervalRep(sprintLength.value, pauseLength.value, repCount.value);
-    }, 12000);
+    }, 3000);
   });
 }
 
