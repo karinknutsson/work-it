@@ -11,6 +11,9 @@ let secCount = 0;
 // set timer array to store setTimeout values
 let timeouts = [];
 
+// set variable to check if stopwatch is running
+let stopwatchOn = false;
+
 
 function incrementTimer(count, div) {
 
@@ -33,6 +36,8 @@ function incrementTimer(count, div) {
 
 
 function countSeconds() {
+
+  stopwatchOn = true;
 
   // start setTimeout and store values in timeouts array
   timeouts.push(setTimeout(function() {
@@ -69,6 +74,7 @@ function pauseTimer(e) {
 
   // stop timer if spacebar is pressed and clear timeouts array
   if (e.keyCode == 32) {
+    stopwatchOn = false;
     timeouts.forEach(function(t) {
       clearTimeout(t);
     })
@@ -99,7 +105,7 @@ function initTimer(e) {
   // initialize timer
   if (e.keyCode == 32 && hourCount == 0 && minCount == 0 && secCount == 0) {
     countSeconds();
-    document.removeEventListener('keyup', startTimer);
+    document.removeEventListener('keyup', initTimer);
     document.addEventListener('keyup', pauseTimer);
   }
 
