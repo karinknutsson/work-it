@@ -69,23 +69,15 @@ function stopTimer() {
   }
 }
 
-function pauseTimer(event) {
-  // stop timer if spacebar is pressed
+function timer(event) {
+  // start timer if spacebar is pressed and timer is off
   if (event.keyCode == 32) {
-    stopTimer();
-  }
-  // remove event listener for pause and add event listener to start timer again
-  document.removeEventListener('keyup', pauseTimer);
-  document.addEventListener('keyup', startTimer);
-}
-
-function startTimer(event) {
-  // start timer if spacebar is pressed
-  if (event.keyCode == 32 && timerRunning == false) {
-    timerRunning = true;
-    countSeconds();
-    document.removeEventListener('keyup', startTimer);
-    document.addEventListener('keyup', pauseTimer);
+    if (timerRunning == false) {
+      timerRunning = true;
+      countSeconds();
+    } else {
+      stopTimer();
+    }
   }
 }
 
@@ -102,8 +94,9 @@ function resetTimer(event) {
   }
 }
 
-export { incrementTimer };
-export { countSeconds };
-export { pauseTimer };
-export { startTimer };
-export { resetTimer };
+function continueTimer() {
+  timerRunning = true;
+  countSeconds();
+}
+
+export { timer, resetTimer, stopTimer, continueTimer };

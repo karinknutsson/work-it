@@ -3,7 +3,7 @@ import {
 } from './modules/screenmode.js';
 
 import {
-  incrementTimer, countSeconds, pauseTimer, startTimer, resetTimer
+  timer, resetTimer
 } from './modules/stopwatch.js';
 
 import {
@@ -11,8 +11,8 @@ import {
 } from './modules/intervals.js'
 
 window.addEventListener('load', (event) => {
-  document.addEventListener('keyup', startTimer);
+  document.addEventListener('keyup', timer);
+  document.addEventListener('keyup', resetTimer);
   document.addEventListener('keyup', goFullscreen);
   document.addEventListener('keyup', openIntervals);
-  document.addEventListener('keyup', resetTimer);
 });
