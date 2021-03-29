@@ -2,6 +2,10 @@ import {
   continueTimer, stopTimer
 } from './stopwatch.js';
 
+import {
+  calculateSegments, context
+} from './arcs.js';
+
 // set variables for interval modal
 const modal = document.getElementById('intervalModal');
 const span = document.getElementsByClassName('close')[0];
@@ -26,6 +30,7 @@ function intervalRep(sprint, pause, rep) {
     // change background and play sound to indicate sprint has started
     document.body.style.background = '#FB2843';
     setTimeout(function() {
+      calculateSegments(sprint * 1000);
       longBeep.play();
     }, 500);
     // set timeout to repeat sprints
@@ -109,6 +114,7 @@ function openIntervals(event) {
 function clearIntervals(event) {
   if (event.keyCode == 67) {
     document.body.style.background = '#4A3DF9';
+    context.clearRect(0, 0, canvas.width, canvas.height);
     intervalsRunning == false;
     intervalTimeouts.forEach(function(t) {
       clearTimeout(t);

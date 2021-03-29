@@ -59,9 +59,11 @@ input:focus {
   outline: none;
 }
 
-.main-container, .form-container {
+.main-container {
+  position: absolute;
+  top: 0;
   width: 100%;
-  height: 86%;
+  height: 100%;
 }
 
 .digit-container {
@@ -73,8 +75,20 @@ input:focus {
   width: 4vw;
 }
 
+.canvas-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.form-container {
+  width: 100%;
+  height: 90%;
+}
+
 .main-container, .digit-container, .colon-container, .form-container,
-#stopwatch-container, #instructions {
+.canvas-container, #stopwatch-container, #instructions {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -123,16 +137,20 @@ input:focus {
 }
 
 #stopwatch-container {
-  margin-top: 3vw;
-  height: 40vw;
   color: #FEFEFE;
   font-size: 13vw;
 }
 
 #instructions {
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 16px;
   width: 100%;
   color: #FEFEFE;
-  /* font-size: 2vw; */
   font-size: 1.1rem;
   letter-spacing: 0.1vw;
+}
+
+#canvas {
+  /* background: black; */
 }
