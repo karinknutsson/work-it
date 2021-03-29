@@ -34,39 +34,38 @@ function incrementTimer(count, div) {
 
 function countSeconds() {
   // start setTimeout and store values in timeouts array
-  timeouts.push(setTimeout(function() {
-      // if second counter is less than 60, increment seconds
-      if (secCount < 59) {
-        secCount++;
-      } else {
-        // when second counter reaches 60, increment minutes and reset second counter
-        if (minCount < 59) {
-          minCount++;
-          incrementTimer(minCount, minDigits);
+  if (timerRunning == true) {
+    timeouts.push(setTimeout(function() {
+        // if second counter is less than 60, increment seconds
+        if (secCount < 59) {
+          secCount++;
         } else {
-          // when minute counter reaches 60, increment hours and reset minute counter
-          hourCount++;
-          incrementTimer(hourCount, hourDigits);
+          // when second counter reaches 60, increment minutes and reset second counter
+          if (minCount < 59) {
+            minCount++;
+            incrementTimer(minCount, minDigits);
+          } else {
+            // when minute counter reaches 60, increment hours and reset minute counter
+            hourCount++;
+            incrementTimer(hourCount, hourDigits);
+          }
+          secCount = 0;
         }
-        secCount = 0;
-      }
-      // call incrementTimer to update values in interface and countSeconds to keep loop going
-      incrementTimer(secCount, secDigits);
-      countSeconds();
-    }, 1000)
-  );
-
+        // call incrementTimer to update values in interface and countSeconds to keep loop going
+        incrementTimer(secCount, secDigits);
+        countSeconds();
+      }, 1000)
+    );
+  }
 }
 
 function stopTimer() {
-  // checks if timer is running and stops it by clearing timeout array
-  if (timerRunning == true) {
-    timerRunning = false;
-    timeouts.forEach(function(t) {
-      clearTimeout(t);
-    })
-    timeouts = [];
-  }
+  // stops timer by clearing timeout array
+  timerRunning = false;
+  timeouts.forEach(function(t) {
+    clearTimeout(t);
+  });
+  timeouts = [];
 }
 
 function timer(event) {
@@ -95,8 +94,10 @@ function resetTimer(event) {
 }
 
 function continueTimer() {
-  timerRunning = true;
-  countSeconds();
+  if (timerRunning == false) {
+    timerRunning = true;
+    countSeconds();
+  }
 }
 
-export { timer, resetTimer, stopTimer, continueTimer };
+export { timer, resetTimer, stopTimer, continueTimer, timerRunning };
