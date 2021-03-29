@@ -30,20 +30,21 @@ function intervalRep(sprint, pause, rep) {
     }, 500);
     // set timeout to repeat sprints
     intervalTimeouts.push(setTimeout(function() {
-        document.body.style.background = '#BB39F0';
-        setTimeout(function() {
-          lowBeep.play();
-        }, 500);
-        setTimeout(function() {
-          document.body.style.background = '#FB2843';
-          rep--;
-          if (rep > 0) {
+        rep--;
+        if (rep > 0) {
+          document.body.style.background = '#BB39F0';
+          setTimeout(function() {
+            lowBeep.play();
+          }, 500);
+          setTimeout(function() {
             intervalRep(sprint, pause, rep);
-          } else {
-            document.body.style.background = '#4A3DF9';
-            countdownCount = 0;
-          }
-        }, pause * 1000);
+          }, pause * 1000);
+        } else {
+          intervalsRunning = false;
+          countdownCount = 0;
+          document.body.style.background = '#4A3DF9';
+          cheering.play();
+        }
       }, sprint * 1000)
     );
   }
