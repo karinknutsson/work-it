@@ -23,7 +23,7 @@ ul {
 
 li {
   display: table-cell;
-  padding-right: 5vw;
+  padding-right: 3.6vw;
 }
 
 input[type=number] {
@@ -133,6 +133,6 @@ input:focus {
   width: 100%;
   color: #FEFEFE;
   /* font-size: 2vw; */
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   letter-spacing: 0.1vw;
 }

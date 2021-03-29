@@ -14,5 +14,4 @@ function goFullscreen(event) {
   }
 }
 
-export { leaveFullscreen };
-export { goFullscreen };
+export { leaveFullscreen, goFullscreen };
