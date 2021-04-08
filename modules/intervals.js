@@ -3,8 +3,8 @@ import {
 } from './stopwatch.js';
 
 import {
-  calculateSegments, context
-} from './arcs.js';
+  calcSprintSegments, sprintTimeouts, context, reverse
+} from './segments.js';
 
 // set variables for interval modal
 const modal = document.getElementById('intervalModal');
@@ -29,10 +29,11 @@ function intervalRep(sprint, pause, rep) {
   if (intervalsRunning == true) {
     // change background and play sound to indicate sprint has started
     document.body.style.background = '#FB2843';
-    setTimeout(function() {
-      calculateSegments(sprint * 1000);
-      longBeep.play();
-    }, 500);
+    intervalTimeouts.push(setTimeout(function() {
+        calcSprintSegments(sprint * 1000);
+        longBeep.play();
+      }, 500)
+    );
     // set timeout to repeat sprints
     intervalTimeouts.push(setTimeout(function() {
         rep--;
@@ -46,6 +47,10 @@ function intervalRep(sprint, pause, rep) {
           }, pause * 1000);
         } else {
           intervalsRunning = false;
+          intervalTimeouts.forEach(function(t) {
+            clearTimeout(t);
+          });
+          intervalTimeouts = [];
           countdownCount = 0;
           document.body.style.background = '#4A3DF9';
           cheering.play();
@@ -63,9 +68,10 @@ function countDown() {
     document.body.style.background = '#4A3DF9';
     if (countdownCount < 2) {
       countdownCount++;
-      setTimeout(function() {
-        countDown();
-      }, 500);
+      intervalTimeouts.push(setTimeout(function() {
+          countDown();
+        }, 500)
+      );
     }
   }, 500);
 }
@@ -84,9 +90,10 @@ function intervalsForm() {
     continueTimer();
     countDown();
     intervalsRunning = true;
-    setTimeout(function() {
-      intervalRep(sprintLength.value, pauseLength.value, repCount.value);
-    }, 3100);
+    intervalTimeouts.push(setTimeout(function() {
+        intervalRep(sprintLength.value, pauseLength.value, repCount.value);
+      }, 3100)
+    );
   });
 }
 
@@ -120,6 +127,10 @@ function clearIntervals(event) {
       clearTimeout(t);
     });
     intervalTimeouts = [];
+    sprintTimeouts.forEach(function(t) {
+      clearTimeout(t);
+    });
+    sprintTimeouts = [];
   }
 }
 
