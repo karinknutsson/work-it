@@ -1,4 +1,4 @@
-// set variables for digit containers
+  // set variables for digit containers
 const hourDigits = document.getElementById('hour-digits');
 const minDigits = document.getElementById('min-digits');
 const secDigits = document.getElementById('sec-digits');
@@ -34,7 +34,7 @@ function incrementTimer(count, div) {
 
 function countSeconds() {
   // start setTimeout and store values in timeouts array
-  if (timerRunning == true) {
+  if (timerRunning === true) {
     timeouts.push(setTimeout(function() {
         // if second counter is less than 60, increment seconds
         if (secCount < 59) {
@@ -70,8 +70,8 @@ function stopTimer() {
 
 function timer(event) {
   // start timer if spacebar is pressed and timer is off
-  if (event.keyCode == 32) {
-    if (timerRunning == false) {
+  if (event.keyCode === 32) {
+    if (timerRunning === false) {
       timerRunning = true;
       countSeconds();
     } else {
@@ -82,7 +82,7 @@ function timer(event) {
 
 function resetTimer(event) {
   // stop and reset timer if r key is pressed
-  if (event.keyCode == 82) {
+  if (event.keyCode === 82) {
     stopTimer();
     updateInterface(hourDigits, 0, 0);
     updateInterface(minDigits, 0, 0);
@@ -94,7 +94,7 @@ function resetTimer(event) {
 }
 
 function continueTimer() {
-  if (timerRunning == false) {
+  if (timerRunning === false) {
     timerRunning = true;
     countSeconds();
   }

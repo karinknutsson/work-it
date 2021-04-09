@@ -8,7 +8,7 @@ import {
 
 import {
   openIntervals, clearIntervals
-} from './modules/intervals.js'
+} from './modules/intervals.js';
 
 window.addEventListener('load', (event) => {
   document.addEventListener('keyup', timer);
@@ -17,3 +17,5 @@ window.addEventListener('load', (event) => {
   document.addEventListener('keyup', openIntervals);
   document.addEventListener('keyup', clearIntervals);
 });
+
+
