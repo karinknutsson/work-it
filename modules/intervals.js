@@ -23,13 +23,7 @@ let pauseTimeouts = [];
 // set variable to check if intervals are running
 let intervalsRunning = false;
 
-
-let sprint;
-let pause;
-let rep;
-
-
-function intervalRep() {
+function intervalRep(sprint, pause, rep) {
   if (intervalsRunning === true) {
     rep--;
     document.body.style.background = '#FB2843';
@@ -39,7 +33,7 @@ function intervalRep() {
         if (rep > 0) {
           document.body.style.background = '#BB39F0';
           lowBeep.play();
-          setTimeout(intervalRep, pause * 1000);
+          setTimeout(intervalRep, pause * 1000, sprint, pause, rep);
         } else {
           intervalsRunning = false;
           intervalTimeouts.forEach(function(t) {
@@ -54,7 +48,7 @@ function intervalRep() {
   }
 }
 
-function countDown() {
+function countDown(sprint, pause, rep) {
   let countDownCount = 0;
   let countDownInterval = window.setInterval(function() {
     document.body.style.background = '#FB2843';
@@ -64,7 +58,7 @@ function countDown() {
     }, 500);
     if (++countDownCount === 3) {
       window.clearInterval(countDownInterval);
-      setTimeout(intervalRep, 1000);
+      setTimeout(intervalRep, 1000, sprint, pause, rep);
     }
   }, 1000);
 }
@@ -78,16 +72,13 @@ function intervalsForm() {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     modal.style.display = 'none';
-    sprint = document.getElementById('sprint-input').value;
-    pause = document.getElementById('pause-input').value;
-    rep = document.getElementById('rep-input').value;
+    const sprint = document.getElementById('sprint-input').value;
+    const pause = document.getElementById('pause-input').value;
+    const rep = document.getElementById('rep-input').value;
 
     continueTimer();
     intervalsRunning = true;
-    setTimeout(countDown, intro.value * 1000);
-
-    //  intervalRep(sprintLength.value, pauseLength.value, repCount.value);
-
+    setTimeout(countDown, intro.value * 1000, sprint, pause, rep);
   });
 }
 

@@ -25,7 +25,6 @@ function sprintSegments(step, initStep) {
     sprintTimeouts.push(setTimeout(sprintSegments, 47, step, initStep));
   } else {
     // clear timeouts when stepCount is smaller than -2
-    // console.log('CLEAR');
     sprintTimeouts.forEach(function(t) {
       clearTimeout(t);
     });
