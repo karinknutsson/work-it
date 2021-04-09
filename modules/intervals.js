@@ -11,47 +11,41 @@ const modal = document.getElementById('intervalModal');
 const span = document.getElementsByClassName('close')[0];
 
 // set variables for sounds
-const shortBeep = new Audio('sounds/short_beep.mp3');
-const longBeep = new Audio('sounds/long_beep.mp3');
-const lowBeep = new Audio('sounds/low_beep.mp3');
-const cheering = new Audio('sounds/cheering.mp3');
-
-// set variable for interval countdown
-let countdownCount = 0;
+const shortBeep = new Audio('/sounds/short_beep.mp3');
+const longBeep = new Audio('/sounds/long_beep.mp3');
+const lowBeep = new Audio('/sounds/low_beep.mp3');
+const cheering = new Audio('/sounds/cheering.mp3');
 
 // set array for interval timeouts
 let intervalTimeouts = [];
+let pauseTimeouts = [];
 
 // set variable to check if intervals are running
 let intervalsRunning = false;
 
-function intervalRep(sprint, pause, rep) {
-  if (intervalsRunning == true) {
-    // change background and play sound to indicate sprint has started
+
+let sprint;
+let pause;
+let rep;
+
+
+function intervalRep() {
+  if (intervalsRunning === true) {
+    rep--;
     document.body.style.background = '#FB2843';
+    calcSprintSegments(sprint * 1000);
+    longBeep.play();
     intervalTimeouts.push(setTimeout(function() {
-        calcSprintSegments(sprint * 1000);
-        longBeep.play();
-      }, 500)
-    );
-    // set timeout to repeat sprints
-    intervalTimeouts.push(setTimeout(function() {
-        rep--;
         if (rep > 0) {
           document.body.style.background = '#BB39F0';
-          setTimeout(function() {
-            lowBeep.play();
-          }, 500);
-          setTimeout(function() {
-            intervalRep(sprint, pause, rep);
-          }, pause * 1000);
+          lowBeep.play();
+          setTimeout(intervalRep, pause * 1000);
         } else {
           intervalsRunning = false;
           intervalTimeouts.forEach(function(t) {
             clearTimeout(t);
           });
           intervalTimeouts = [];
-          countdownCount = 0;
           document.body.style.background = '#4A3DF9';
           cheering.play();
         }
@@ -61,45 +55,45 @@ function intervalRep(sprint, pause, rep) {
 }
 
 function countDown() {
-  // change background quickly 3 times and play sound as countdown
-  document.body.style.background = '#FB2843';
-  setTimeout(function() {
-    shortBeep.play();
-    document.body.style.background = '#4A3DF9';
-    if (countdownCount < 2) {
-      countdownCount++;
-      intervalTimeouts.push(setTimeout(function() {
-          countDown();
-        }, 500)
-      );
+  let countDownCount = 0;
+  let countDownInterval = window.setInterval(function() {
+    document.body.style.background = '#FB2843';
+    setTimeout(function() {
+      shortBeep.play();
+      document.body.style.background = '#4A3DF9';
+    }, 500);
+    if (++countDownCount === 3) {
+      window.clearInterval(countDownInterval);
+      setTimeout(intervalRep, 1000);
     }
-  }, 500);
+  }, 1000);
 }
 
 function intervalsForm() {
   // set variables for form and inputs
   const form = document.getElementById('interval-form');
-  const sprintLength = document.getElementById('sprint-input');
-  const pauseLength = document.getElementById('pause-input');
-  const repCount = document.getElementById('rep-input');
+  const intro = document.getElementById('intro-input');
 
   // start countdown and intervals when form is submitted
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     modal.style.display = 'none';
+    sprint = document.getElementById('sprint-input').value;
+    pause = document.getElementById('pause-input').value;
+    rep = document.getElementById('rep-input').value;
+
     continueTimer();
-    countDown();
     intervalsRunning = true;
-    intervalTimeouts.push(setTimeout(function() {
-        intervalRep(sprintLength.value, pauseLength.value, repCount.value);
-      }, 3100)
-    );
+    setTimeout(countDown, intro.value * 1000);
+
+    //  intervalRep(sprintLength.value, pauseLength.value, repCount.value);
+
   });
 }
 
 function openIntervals(event) {
   // stop timer and open interval modal if s key is pressed
-  if (event.keyCode == 83) {
+  if (event.keyCode === 83) {
     stopTimer();
     modal.style.display = 'block';
     intervalsForm();
@@ -110,7 +104,7 @@ function openIntervals(event) {
       continueTimer();
     }
     window.onclick = function(event) {
-      if (event.target == modal) {
+      if (event.target === modal) {
         modal.style.display = 'none';
         continueTimer();
       }
@@ -119,17 +113,17 @@ function openIntervals(event) {
 }
 
 function clearIntervals(event) {
-  if (event.keyCode == 67) {
+  if (event.keyCode === 67) {
     document.body.style.background = '#4A3DF9';
     context.clearRect(0, 0, canvas.width, canvas.height);
-    intervalsRunning == false;
+    intervalsRunning = false;
     intervalTimeouts.forEach(function(t) {
       clearTimeout(t);
     });
-    intervalTimeouts = [];
     sprintTimeouts.forEach(function(t) {
       clearTimeout(t);
     });
+    intervalTimeouts = [];
     sprintTimeouts = [];
   }
 }
