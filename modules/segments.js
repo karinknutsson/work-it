@@ -1,9 +1,7 @@
 const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
 
-let stepCount = 0;
 let sprintTimeouts = [];
-let reverse = false;
 
 function drawSegment(angle) {
   context.clearRect(0, 0, canvas.width, canvas.height);
@@ -16,13 +14,13 @@ function drawSegment(angle) {
   context.fill();
 }
 
-function sprintSegments(step, initStep) {
+function sprintSegments(stepCount, step, initStep) {
   if (stepCount > -1) {
     // while stepcount is non-negative, draw segment with angle increasing with each step
     drawSegment(-(0.5 - step) * Math.PI);
     step += initStep;
     stepCount--;
-    sprintTimeouts.push(setTimeout(sprintSegments, 47, step, initStep));
+    sprintTimeouts.push(setTimeout(sprintSegments, 47, stepCount, step, initStep));
   } else {
     // clear timeouts when stepCount is smaller than -2
     sprintTimeouts.forEach(function(t) {
@@ -34,13 +32,11 @@ function sprintSegments(step, initStep) {
 }
 
 function calcSprintSegments(ms) {
-  // console.log('sprint segments initiated');
   // calculate how many steps circle segments will be drawn in
-  stepCount = ms / 50;
+  let stepCount = ms / 50;
   // calculate size of each step
-  const step = 2 / stepCount;
-  // console.log('stepCount: ' + stepCount + ', step: ' + step);
-  sprintSegments(step, step);
+  let step = 2 / stepCount;
+  sprintSegments(stepCount, step, step);
 }
 
-export { calcSprintSegments, sprintTimeouts, context, reverse };
+export { calcSprintSegments, sprintTimeouts, context };

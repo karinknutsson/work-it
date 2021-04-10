@@ -3,7 +3,7 @@ import {
 } from './stopwatch.js';
 
 import {
-  calcSprintSegments, sprintTimeouts, context, reverse
+  calcSprintSegments, sprintTimeouts, context
 } from './segments.js';
 
 // set variables for interval modal
@@ -18,22 +18,25 @@ const cheering = new Audio('/sounds/cheering.mp3');
 
 // set array for interval timeouts
 let intervalTimeouts = [];
-let pauseTimeouts = [];
 
-// set variable to check if intervals are running
+// set boolean to check if intervals are running
 let intervalsRunning = false;
 
-function intervalRep(sprint, pause, rep) {
+function intervalRep(sprint, pause, rep, sound) {
   if (intervalsRunning === true) {
     rep--;
     document.body.style.background = '#FB2843';
     calcSprintSegments(sprint * 1000);
-    longBeep.play();
+    if (sound === true) {
+      longBeep.play();
+    }
     intervalTimeouts.push(setTimeout(function() {
         if (rep > 0) {
           document.body.style.background = '#BB39F0';
-          lowBeep.play();
-          setTimeout(intervalRep, pause * 1000, sprint, pause, rep);
+          if (sound === true) {
+            lowBeep.play();
+          }
+          setTimeout(intervalRep, pause * 1000, sprint, pause, rep, sound);
         } else {
           intervalsRunning = false;
           intervalTimeouts.forEach(function(t) {
@@ -41,24 +44,28 @@ function intervalRep(sprint, pause, rep) {
           });
           intervalTimeouts = [];
           document.body.style.background = '#4A3DF9';
-          cheering.play();
+          if (sound === true) {
+            cheering.play();
+          }
         }
       }, sprint * 1000)
     );
   }
 }
 
-function countDown(sprint, pause, rep) {
+function countDown(sprint, pause, rep, sound) {
   let countDownCount = 0;
   let countDownInterval = window.setInterval(function() {
     document.body.style.background = '#FB2843';
     setTimeout(function() {
-      shortBeep.play();
+      if (sound === true) {
+        shortBeep.play();
+      }
       document.body.style.background = '#4A3DF9';
     }, 500);
     if (++countDownCount === 3) {
       window.clearInterval(countDownInterval);
-      setTimeout(intervalRep, 1000, sprint, pause, rep);
+      setTimeout(intervalRep, 1000, sprint, pause, rep, sound);
     }
   }, 1000);
 }
@@ -72,13 +79,15 @@ function intervalsForm() {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     modal.style.display = 'none';
+
     const sprint = document.getElementById('sprint-input').value;
     const pause = document.getElementById('pause-input').value;
     const rep = document.getElementById('rep-input').value;
+    const sound = document.getElementById('sound-input').checked;
 
     continueTimer();
     intervalsRunning = true;
-    setTimeout(countDown, intro.value * 1000, sprint, pause, rep);
+    setTimeout(countDown, intro.value * 1000, sprint, pause, rep, sound);
   });
 }
 
@@ -115,7 +124,6 @@ function clearIntervals(event) {
       clearTimeout(t);
     });
     intervalTimeouts = [];
-    sprintTimeouts = [];
   }
 }
 
