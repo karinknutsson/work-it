@@ -25,6 +25,7 @@ let intervalsRunning = false;
 function intervalRep(sprint, pause, rep, sound) {
   if (intervalsRunning === true) {
     rep--;
+    // change background, draw segment graphic and play beep on each sprint interval
     document.body.style.background = '#FB2843';
     calcSprintSegments(sprint * 1000);
     if (sound === true) {
@@ -32,12 +33,14 @@ function intervalRep(sprint, pause, rep, sound) {
     }
     intervalTimeouts.push(setTimeout(function() {
         if (rep > 0) {
+          // change background and  play lower beep on each pause
           document.body.style.background = '#BB39F0';
           if (sound === true) {
             lowBeep.play();
           }
           setTimeout(intervalRep, pause * 1000, sprint, pause, rep, sound);
         } else {
+          // clear intervals and reset background after the last sprint
           intervalsRunning = false;
           intervalTimeouts.forEach(function(t) {
             clearTimeout(t);
@@ -54,6 +57,7 @@ function intervalRep(sprint, pause, rep, sound) {
 }
 
 function countDown(sprint, pause, rep, sound) {
+  // countdown of 3 beeps & background changes before intervals start
   let countDownCount = 0;
   let countDownInterval = window.setInterval(function() {
     document.body.style.background = '#FB2843';
@@ -92,13 +96,13 @@ function intervalsForm() {
 }
 
 function openIntervals(event) {
-  // stop timer and open interval modal if s key is pressed
+  // stop timer and open interval modal if S key is pressed
   if (event.keyCode === 83) {
     stopTimer();
     modal.style.display = 'block';
     intervalsForm();
 
-    // close modal and continue timer if user clicks on x or window outside modal
+    // close modal and continue timer if user clicks on close button or window outside modal
     span.onclick = function() {
       modal.style.display = 'none';
       continueTimer();
@@ -114,6 +118,7 @@ function openIntervals(event) {
 
 function clearIntervals(event) {
   if (event.keyCode === 67) {
+    // reset intervals and graphic if C key is pressed
     document.body.style.background = '#4A3DF9';
     context.clearRect(0, 0, canvas.width, canvas.height);
     intervalsRunning = false;

@@ -81,7 +81,7 @@ function timer(event) {
 }
 
 function resetTimer(event) {
-  // stop and reset timer if r key is pressed
+  // stop and reset timer if R key is pressed
   if (event.keyCode === 82) {
     stopTimer();
     updateInterface(hourDigits, 0, 0);
