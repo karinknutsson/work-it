@@ -3,7 +3,7 @@ import {
 } from './stopwatch.js';
 
 import {
-  calcSprintSegments, sprintTimeouts, context, reverse
+  calcSprintSegments, sprintTimeouts, context
 } from './segments.js';
 
 // set variables for interval modal
@@ -18,53 +18,58 @@ const cheering = new Audio('/sounds/cheering.mp3');
 
 // set array for interval timeouts
 let intervalTimeouts = [];
-let pauseTimeouts = [];
 
-// set variable to check if intervals are running
+// set boolean to check if intervals are running
 let intervalsRunning = false;
 
-
-let sprint;
-let pause;
-let rep;
-
-
-function intervalRep() {
+function intervalRep(sprint, pause, rep, sound) {
   if (intervalsRunning === true) {
     rep--;
+    // change background, draw segment graphic and play beep on each sprint interval
     document.body.style.background = '#FB2843';
     calcSprintSegments(sprint * 1000);
-    longBeep.play();
+    if (sound === true) {
+      longBeep.play();
+    }
     intervalTimeouts.push(setTimeout(function() {
         if (rep > 0) {
+          // change background and  play lower beep on each pause
           document.body.style.background = '#BB39F0';
-          lowBeep.play();
-          setTimeout(intervalRep, pause * 1000);
+          if (sound === true) {
+            lowBeep.play();
+          }
+          setTimeout(intervalRep, pause * 1000, sprint, pause, rep, sound);
         } else {
+          // clear intervals and reset background after the last sprint
           intervalsRunning = false;
           intervalTimeouts.forEach(function(t) {
             clearTimeout(t);
           });
           intervalTimeouts = [];
           document.body.style.background = '#4A3DF9';
-          cheering.play();
+          if (sound === true) {
+            cheering.play();
+          }
         }
       }, sprint * 1000)
     );
   }
 }
 
-function countDown() {
+function countDown(sprint, pause, rep, sound) {
+  // countdown of 3 beeps & background changes before intervals start
   let countDownCount = 0;
   let countDownInterval = window.setInterval(function() {
     document.body.style.background = '#FB2843';
     setTimeout(function() {
-      shortBeep.play();
+      if (sound === true) {
+        shortBeep.play();
+      }
       document.body.style.background = '#4A3DF9';
     }, 500);
     if (++countDownCount === 3) {
       window.clearInterval(countDownInterval);
-      setTimeout(intervalRep, 1000);
+      setTimeout(intervalRep, 1000, sprint, pause, rep, sound);
     }
   }, 1000);
 }
@@ -78,27 +83,26 @@ function intervalsForm() {
   form.addEventListener('submit', (event) => {
     event.preventDefault();
     modal.style.display = 'none';
-    sprint = document.getElementById('sprint-input').value;
-    pause = document.getElementById('pause-input').value;
-    rep = document.getElementById('rep-input').value;
+
+    const sprint = document.getElementById('sprint-input').value;
+    const pause = document.getElementById('pause-input').value;
+    const rep = document.getElementById('rep-input').value;
+    const sound = document.getElementById('sound-input').checked;
 
     continueTimer();
     intervalsRunning = true;
-    setTimeout(countDown, intro.value * 1000);
-
-    //  intervalRep(sprintLength.value, pauseLength.value, repCount.value);
-
+    setTimeout(countDown, intro.value * 1000, sprint, pause, rep, sound);
   });
 }
 
 function openIntervals(event) {
-  // stop timer and open interval modal if s key is pressed
+  // stop timer and open interval modal if S key is pressed
   if (event.keyCode === 83) {
     stopTimer();
     modal.style.display = 'block';
     intervalsForm();
 
-    // close modal and continue timer if user clicks on x or window outside modal
+    // close modal and continue timer if user clicks on close button or window outside modal
     span.onclick = function() {
       modal.style.display = 'none';
       continueTimer();
@@ -114,6 +118,7 @@ function openIntervals(event) {
 
 function clearIntervals(event) {
   if (event.keyCode === 67) {
+    // reset intervals and graphic if C key is pressed
     document.body.style.background = '#4A3DF9';
     context.clearRect(0, 0, canvas.width, canvas.height);
     intervalsRunning = false;
@@ -124,7 +129,6 @@ function clearIntervals(event) {
       clearTimeout(t);
     });
     intervalTimeouts = [];
-    sprintTimeouts = [];
   }
 }
 

@@ -12,6 +12,10 @@ body {
   transition: background 1s;
 }
 
+h1 {
+  color: #FB2843;
+}
+
 h3 {
   font-size: 1.3rem;
   font-weight: 700;
@@ -24,6 +28,10 @@ ul {
 li {
   display: table-cell;
   padding-right: 3.6vw;
+}
+
+input[type=checkbox] {
+  visibility: hidden;
 }
 
 input[type=number] {
@@ -43,7 +51,6 @@ input[type=number] {
 input[type=submit] {
   width: 160px;
   height: 54px;
-  margin-top: 8%;
   padding-top: 6px;
   background: #FB2843;
   color: #FEFEFE;
@@ -112,9 +119,9 @@ input:focus {
   width: 50%;
   min-width: 500px;
   max-width: 800px;
-  height: 70%;
+  height: 80%;
   min-height: 400px;
-  max-height: 700px;
+  max-height: 800px;
 }
 
 .close {
@@ -130,6 +137,58 @@ input:focus {
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+.main {
+  display: block;
+  position: relative;
+  padding-left: 45px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.custom-checkbox {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  height: 32px;
+  width: 32px;
+  background: #aaa;
+  border-radius: 5px;
+}
+
+.main:hover input ~ .custom-checkbox {
+  background: #FB2843;
+}
+
+.main input:active ~ .custom-checkbox {
+  background: #FB2843;
+}
+
+.main input:checked ~ .custom-checkbox {
+  background: #FB2843;
+}
+
+.custom-checkbox:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.main input:checked ~ .custom-checkbox:after {
+  display: block;
+}
+
+.main .custom-checkbox:after {
+  left: 8px;
+  bottom: 5px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 4px 4px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 #hour-digits, #min-digits, #sec-digits {
