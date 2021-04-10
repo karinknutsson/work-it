@@ -35,6 +35,7 @@ function intervalRep(sprint, pause, rep, sound) {
         if (rep > 0) {
           // change background and  play lower beep on each pause
           document.body.style.background = '#BB39F0';
+          calcSprintSegments(pause * 1000, true);
           if (sound === true) {
             lowBeep.play();
           }
