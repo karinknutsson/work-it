@@ -11,10 +11,10 @@ const modal = document.getElementById('intervalModal');
 const span = document.getElementsByClassName('close')[0];
 
 // set variables for sounds
-const shortBeep = new Audio('/sounds/short_beep.mp3');
-const longBeep = new Audio('/sounds/long_beep.mp3');
-const lowBeep = new Audio('/sounds/low_beep.mp3');
-const cheering = new Audio('/sounds/cheering.mp3');
+const shortBeep = new Audio('sounds/short_beep.mp3');
+const longBeep = new Audio('sounds/long_beep.mp3');
+const lowBeep = new Audio('sounds/low_beep.mp3');
+const cheering = new Audio('sounds/cheering.mp3');
 
 // set array for interval timeouts
 let intervalTimeouts = [];
