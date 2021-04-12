@@ -16,11 +16,6 @@ h1 {
   color: #FB2843;
 }
 
-h3 {
-  font-size: 1.3rem;
-  font-weight: 700;
-}
-
 ul {
   list-style-type: none;
 }
@@ -37,7 +32,7 @@ input[type=checkbox] {
 input[type=number] {
   width: 80px;
   height: 50px;
-  margin: 6px 0 10px 24px;
+  margin: 6px 0 10px 64px;
   background: #F0F0F0;
   color: black;
   font-family: inherit;
@@ -51,6 +46,7 @@ input[type=number] {
 input[type=submit] {
   width: 160px;
   height: 54px;
+  margin-top: 16px;
   padding-top: 6px;
   background: #FB2843;
   color: #FEFEFE;
@@ -114,14 +110,14 @@ input:focus {
 }
 
 .modal-content {
-  background-color: white;
+  background-color: #FEFEFE;
   margin: 6vw auto;
   width: 50%;
   min-width: 500px;
   max-width: 800px;
-  height: 80%;
+  height: 85%;
   min-height: 400px;
-  max-height: 800px;
+  max-height: 850px;
 }
 
 .close {
@@ -139,21 +135,30 @@ input:focus {
   justify-content: space-between;
 }
 
+.form-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.label-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
 .main {
-  display: block;
-  position: relative;
-  padding-left: 45px;
   cursor: pointer;
   font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .custom-checkbox {
-  position: absolute;
-  top: 15px;
-  left: 0;
+  margin-right: 16px;
   height: 32px;
   width: 32px;
-  background: #aaa;
+  background: #C5C5C5;
   border-radius: 5px;
 }
 
@@ -180,15 +185,40 @@ input:focus {
 }
 
 .main .custom-checkbox:after {
-  left: 8px;
+  left: 10px;
   bottom: 5px;
   width: 6px;
-  height: 12px;
-  border: solid white;
+  height: 20px;
+  border: solid #FEFEFE;
   border-width: 0 4px 4px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+.hint {
+  width: 20px;
+  height: 20px;
+  margin-top: -4px;
+  margin-left: 12px;
+  background: #D9D9D9;
+  color: #FEFEFE;
+  font-size: 10pt;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-hint {
+  position: absolute;
+  z-index: 50;
+  padding: 24px 32px;
+  color: black;
+  background: #FFE793;
+  font-size: 12pt;
+  font-weight: 500;
+  display: none;
 }
 
 #hour-digits, #min-digits, #sec-digits {
@@ -210,6 +240,6 @@ input:focus {
   letter-spacing: 0.1vw;
 }
 
-#canvas {
-  /* background: black; */
+#interval-form {
+  width: 70%;
 }
