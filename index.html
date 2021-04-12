@@ -46,28 +46,28 @@
             <div class="form-input">
               <div class="form-label">
                 <div class="label-title"><label for="intro-input">Intro length</label></div>
-                <div class="hint">?</div>
+                <div class="hint" id="intro-hint-btn">?</div>
               </div>
               <input id="intro-input" type="number" min="0" max="300" step="1" value="5">
             </div>
             <div class="form-input">
               <div class="form-label">
                 <div class="label-title"><label for="sprint-input">Sprint length</label></div>
-                <div class="hint">?</div>
+                <div class="hint" id="sprint-hint-btn">?</div>
               </div>
               <input id="sprint-input" type="number" min="3" max="300" value="30">
             </div>
             <div class="form-input">
               <div class="form-label">
                 <div class="label-title"><label for="pause-input">Pause length</label></div>
-                <div class="hint">?</div>
+                <div class="hint" id="pause-hint-btn">?</div>
               </div>
               <input id="pause-input" type="number" min="3" max="300" value="10">
             </div>
             <div class="form-input">
               <div class="form-label">
                 <div class="label-title"><label for="rep-input">How many reps?</label></div>
-                <div class="hint">?</div>
+                <div class="hint" id="rep-hint-btn">?</div>
               </div>
               <input id="rep-input" type="number" min="1" max="20" step="1" value="3">
             </div>
@@ -86,6 +86,22 @@
 
     <div class="canvas-container">
       <canvas id="canvas" width="600" height="600"></canvas>
+    </div>
+
+    <div class="form-hint" id="intro-hint">
+      Amount of seconds to wait before first interval
+    </div>
+
+    <div class="form-hint" id="sprint-hint">
+      Length of each sprint (in seconds)
+    </div>
+
+    <div class="form-hint" id="pause-hint">
+      Length of each pause between sprints (in seconds)
+    </div>
+
+    <div class="form-hint" id="rep-hint">
+      Number of repetitions
     </div>
 
     <script type="module" src="index.js"></script>

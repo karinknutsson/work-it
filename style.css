@@ -210,6 +210,17 @@ input:focus {
   justify-content: center;
 }
 
+.form-hint {
+  position: absolute;
+  z-index: 50;
+  padding: 24px 32px;
+  color: black;
+  background: #FFE793;
+  font-size: 12pt;
+  font-weight: 500;
+  display: none;
+}
+
 #hour-digits, #min-digits, #sec-digits {
   display: flex;
 }
