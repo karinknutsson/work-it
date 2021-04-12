@@ -44,26 +44,38 @@
         <div class="form-container">
           <form id="interval-form">
             <div class="form-input">
-              <h3><label for="sprint-input">Sprint length</label></h3>
+              <div class="form-label">
+                <div class="label-title"><label for="intro-input">Intro length</label></div>
+                <div class="hint">?</div>
+              </div>
+              <input id="intro-input" type="number" min="0" max="300" step="1" value="5">
+            </div>
+            <div class="form-input">
+              <div class="form-label">
+                <div class="label-title"><label for="sprint-input">Sprint length</label></div>
+                <div class="hint">?</div>
+              </div>
               <input id="sprint-input" type="number" min="3" max="300" value="30">
             </div>
             <div class="form-input">
-              <h3><label for="pause-input">Pause length</label></h3>
+              <div class="form-label">
+                <div class="label-title"><label for="pause-input">Pause length</label></div>
+                <div class="hint">?</div>
+              </div>
               <input id="pause-input" type="number" min="3" max="300" value="10">
             </div>
             <div class="form-input">
-              <h3><label for="rep-input">How many reps?</label></h3>
+              <div class="form-label">
+                <div class="label-title"><label for="rep-input">How many reps?</label></div>
+                <div class="hint">?</div>
+              </div>
               <input id="rep-input" type="number" min="1" max="20" step="1" value="3">
             </div>
             <div class="form-input">
-              <h3><label for="intro-input">Intro length</label></h3>
-              <input id="intro-input" type="number" min="0" max="300" step="1" value="3">
-            </div>
-            <div class="form-input">
               <label class="main">
+                <span class="custom-checkbox"></span>
                 <h3>Play sounds</h3>
                 <input id = "sound-input" type="checkbox">
-                <span class="custom-checkbox"></span>
               </label>
             </div>
             <input type="submit" value="GO">
