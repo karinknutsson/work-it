@@ -99,7 +99,7 @@ function openIntervals(event) {
   // stop timer and open interval modal if S key is pressed
   if (event.keyCode === 83) {
     stopTimer();
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
     intervalsForm();
 
     // close modal and continue timer if user clicks on close button or window outside modal
